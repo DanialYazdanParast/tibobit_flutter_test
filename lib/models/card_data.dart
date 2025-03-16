@@ -26,20 +26,4 @@ class CardData {
         throw Exception('Invalid card index');
     }
   }
-
-  // // برای مقایسه دو کارت
-  // @override
-  // bool operator ==(Object other) =>
-  //     identical(this, other) ||
-  //     other is CardData &&
-  //         runtimeType == other.runtimeType &&
-  //         title == other.title &&
-  //         amount == other.amount;
-
-  // @override
-  // int get hashCode => title.hashCode ^ amount.hashCode;
-
-  // // برای نمایش اطلاعات کارت به صورت رشته
-  // @override
-  // String toString() => 'CardData(title: $title, amount: $amount)';
 }
