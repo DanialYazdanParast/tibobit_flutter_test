@@ -79,13 +79,17 @@ class IdentityCard extends StatelessWidget {
         ),
         // نمایش حالت گسترش یافته
         secondChild: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CardHeader(title: title, amount: amount),
-            const SizedBox(height: 16),
-            ...ExpandedContentBuilder.build(title),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CardHeader(title: title, amount: amount),
+                const SizedBox(height: 16),
+                ...ExpandedContentBuilder.build(title),
+              ],
+            ),
           ],
         ),
       ),

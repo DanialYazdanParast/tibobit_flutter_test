@@ -40,14 +40,19 @@ class CardPositionCalculator {
     } else {
       final selectedCardData = CardData.fromIndex(selectedCard);
 
-      // محاسبه ارتفاع محتوای کارت انتخاب شده
+      // محاسبه ارتفاع کل محتوای کارت باز شده
       final contentHeight =
           (ExpandedContentBuilder.build(selectedCardData.title).length * 32.0) +
           (25.0) +
           AppConstants.cardBaseHeight;
 
-      // محاسبه فضای اضافی برای کارت‌های بعدی
+      // فاصله اصلی برای جا دادن محتوای کارت باز شده
       final extraSpace = (contentHeight - AppConstants.normalCardHeight) * 0.8;
+
+      // فاصله اضافی برای هر کارت بعدی
+      // مثال: اگر کارت اول انتخاب شده باشد
+      // کارت دوم: (2 - 1 - 1) * 5 = 0 پیکسل
+      // کارت سوم: (3 - 1 - 1) * 5 = 5 پیکسل
       final additionalOffset = (index - selectedCard - 1) * 5.0;
 
       return basePosition + extraSpace + additionalOffset;
