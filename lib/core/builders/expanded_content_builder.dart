@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:tibobit_flutter/features/authentication/presentation/widgets/verification_item.dart';
 
 class ExpandedContentBuilder {

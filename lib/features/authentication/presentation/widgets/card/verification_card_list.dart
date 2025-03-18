@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:tibobit_flutter/core/constants/app_constants.dart';
 import 'package:tibobit_flutter/features/authentication/presentation/controller/verification_controller.dart';
+import 'package:tibobit_flutter/features/authentication/presentation/widgets/card/identity_card_expandable.dart';
 import 'package:tibobit_flutter/models/card_data.dart';
 import 'identity_card.dart';
 
@@ -71,10 +72,12 @@ class VerificationCardList extends StatelessWidget {
         child: GestureDetector(
           onTap: () => controller.toggleCard(index),
           child: IdentityCard(
+            //     controller: controller,
             title: cardData.title,
             amount: cardData.amount,
             selected: isSelected,
             expanded: isSelected,
+            //   index: index,
           ),
         ),
       );

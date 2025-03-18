@@ -13,9 +13,12 @@ class VerificationItem extends StatelessWidget {
         children: [
           const Icon(Icons.check_circle, color: Colors.green, size: 16),
           const SizedBox(width: 8),
-          Text(
-            text,
-            style: const TextStyle(color: Colors.white70, fontSize: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.white70, fontSize: 12),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),

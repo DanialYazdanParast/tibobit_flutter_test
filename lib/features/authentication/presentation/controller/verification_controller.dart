@@ -16,7 +16,6 @@ class VerificationCardController extends GetxController {
   void toggleCard(int index) {
     selectedCard.value = (selectedCard.value == index) ? -1 : index;
     positionCalculator.selectedCard = selectedCard.value;
-    update();
   }
 
   double calculateContentHeight(BuildContext context) {

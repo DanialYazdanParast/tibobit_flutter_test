@@ -37,7 +37,6 @@ class IdentityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // تعیین رنگ کارت بر اساس سطح و وضعیت انتخاب
     final isLevelOne = title.contains('سطح یک');
     final cardColor =
         isLevelOne
@@ -58,41 +57,70 @@ class IdentityCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.8),
-            blurRadius: 20,
-            spreadRadius: 5,
-            offset: const Offset(0, 8),
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            spreadRadius: 2,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      // انیمیشن تغییر حالت بین عادی و گسترش یافته
-      child: AnimatedCrossFade(
-        duration: AppConstants.animationDuration,
-        crossFadeState:
-            expanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-        // نمایش حالت عادی
-        firstChild: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [CardHeader(title: title, amount: amount)],
-        ),
-        // نمایش حالت گسترش یافته
-        secondChild: Column(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CardHeader(title: title, amount: amount),
-                const SizedBox(height: 16),
-                ...ExpandedContentBuilder.build(title),
-              ],
+      child: Stack(
+        alignment: Alignment.topRight,
+        clipBehavior: Clip.none,
+        children: [
+          IntrinsicWidth(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width - 32,
+              ),
+              child: AnimatedCrossFade(
+                duration: AppConstants.animationDuration,
+                crossFadeState:
+                    expanded
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                firstChild: _buildCollapsedView(),
+                secondChild: _buildExpandedView(),
+              ),
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: -30,
+            left: 0,
+            right: 0,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: AnimatedContainer(
+                duration: AppConstants.animationDuration,
+                curve: Curves.easeInOut,
+                color: Colors.red,
+                height: 25,
+                width: 25,
+              ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  /// ساخت نمای جمع‌شده‌ی کارت
+  Widget _buildCollapsedView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [CardHeader(title: title, amount: amount)],
+    );
+  }
+
+  /// ساخت نمای گسترش‌یافته‌ی کارت
+  Widget _buildExpandedView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CardHeader(title: title, amount: amount),
+        const SizedBox(height: 16),
+        ...ExpandedContentBuilder.build(title),
+      ],
     );
   }
 }
